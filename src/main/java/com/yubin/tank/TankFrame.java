@@ -19,7 +19,7 @@ public class TankFrame extends Frame {
 
     static final int GAME_HEIGHT = 600;
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
 
     Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
@@ -143,6 +143,9 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = false;
+                    break;
+                case KeyEvent.VK_SPACE: // 抬起 空格键 打出一颗子弹
+                    myTank.fire();
                     break;
                 default:
                     break;

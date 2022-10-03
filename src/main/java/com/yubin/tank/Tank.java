@@ -13,10 +13,13 @@ public class Tank {
     // 控制坦克静止和移动
     private boolean moving = false;
 
-    public Tank(int x, int y, Dir dir) {
+    private TankFrame tf;
+
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void setDir(Dir dir) {
@@ -62,5 +65,9 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        tf.bullet = new Bullet(x, y, dir);
     }
 }
