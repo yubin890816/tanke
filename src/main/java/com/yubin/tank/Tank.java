@@ -32,7 +32,13 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        // 获取画笔老的颜色
+        Color color = g.getColor();
+        // 设置坦克的颜色
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
+        // 还原画笔的颜色
+        g.setColor(color);
         //x += 10;
         //y += 10;
         move();

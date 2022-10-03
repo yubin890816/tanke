@@ -8,7 +8,7 @@ import java.awt.*;
 public class Bullet {
 
     // 子弹移动的速度
-    public static final int SPEED = 10;
+    public static final int SPEED = 1;
 
     private int x, y;
 

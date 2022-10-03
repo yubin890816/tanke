@@ -15,13 +15,17 @@ public class TankFrame extends Frame {
     // 坦克移动的速度
     //private static final int SPEED = 10;
 
+    static final int GAME_WIDTH = 800;
+
+    static final int GAME_HEIGHT = 600;
+
     Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() throws HeadlessException {
         // 设置窗口大小
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         // 不能改变窗口大小
         setResizable(false);
         // 设置窗口标题栏的文字
@@ -70,6 +74,28 @@ public class TankFrame extends Frame {
             default:
                 break;
         }*/
+    }
+
+    /**
+     * 采用双缓存解决画面闪烁问题
+     */
+    Image offScreenImage = null;
+
+    // repaint -> update -> paint (截获update)
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        // 获取内存中的画笔
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        // 将内存中的画面一次性画到屏幕上
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
     class MyKeyListener extends KeyAdapter {
