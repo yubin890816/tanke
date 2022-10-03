@@ -57,18 +57,15 @@ public class TankFrame extends Frame {
         g.setColor(c);
 
         myTank.paint(g);
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
+        Iterator<Bullet> iterator = bulletList.iterator();
+        while (iterator.hasNext()) {
+            Bullet bullet = iterator.next();
+            if (!bullet.live) {
+                iterator.remove();
+            } else {
+                bullet.paint(g);
+            }
         }
-        //Iterator<Bullet> iterator = bulletList.iterator();
-        //while (iterator.hasNext()) {
-        //    Bullet bullet = iterator.next();
-        //    if (!bullet.live) {
-        //        iterator.remove();
-        //    } else {
-        //        bullet.paint(g);
-        //    }
-        //}
         // 这个方法其实放在Tank类里面要更加的合适(坦克自己更加的了解他自己在什么位置)
         /**
          * 在窗口 200(x轴) 200(y轴)的位置画一个宽50 高50 的矩形

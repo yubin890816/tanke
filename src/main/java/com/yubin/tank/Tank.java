@@ -1,6 +1,8 @@
 package com.yubin.tank;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tank {
     // 坦克移动的速度
@@ -68,6 +70,6 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bulletList.add(new Bullet(x, y, dir, tf));
+        tf.bulletList.add(new Bullet(x, y, dir));
     }
 }

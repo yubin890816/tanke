@@ -16,19 +16,13 @@ public class Bullet {
 
     boolean live = true;
 
-    private TankFrame tf;
-
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
     }
 
     public void paint(Graphics g) {
-        if (!live) {
-            tf.bulletList.remove(this);
-        }
         Color color = g.getColor();
         // 设置子弹的颜色
         g.setColor(Color.RED);
