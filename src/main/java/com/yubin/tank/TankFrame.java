@@ -17,6 +17,8 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN);
 
+    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+
     public TankFrame() throws HeadlessException {
         // 设置窗口大小
         setSize(800, 600);
@@ -43,6 +45,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
+        bullet.paint(g);
         // 这个方法其实放在Tank类里面要更加的合适(坦克自己更加的了解他自己在什么位置)
         /**
          * 在窗口 200(x轴) 200(y轴)的位置画一个宽50 高50 的矩形
