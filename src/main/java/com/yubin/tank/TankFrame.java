@@ -7,13 +7,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
-
-    int x = 200, y = 200;
-
-    Dir dir = Dir.DOWN;
-
+    // 写到这里, 如果我要和别人一起玩的话, 并且增加敌人的坦克, 那怎么处理呢? x1、y1; x2、y2; ...
+    // 这样这个类该有多么的庞大, 其实细细思考下, x、y、dir 其实都是坦克的一个属性, 那么我们
+    // 定义一个Tank 的类是不是好很多
+    //int x = 200, y = 200;
+    //Dir dir = Dir.DOWN;
     // 坦克移动的速度
-    private static final int SPEED = 10;
+    //private static final int SPEED = 10;
+
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame() throws HeadlessException {
         // 设置窗口大小
@@ -40,11 +42,13 @@ public class TankFrame extends Frame {
     // Graphics: 相当于画笔
     @Override
     public void paint(Graphics g) {
+        myTank.paint(g);
+        // 这个方法其实放在Tank类里面要更加的合适(坦克自己更加的了解他自己在什么位置)
         /**
          * 在窗口 200(x轴) 200(y轴)的位置画一个宽50 高50 的矩形
          * 这里将矩形位置的 x、y的变量设置为变量
          */
-        g.fillRect(x, y, 50, 50);
+        /*g.fillRect(x, y, 50, 50);
         //x += 10;
         //y += 10;
         switch (dir) {
@@ -62,7 +66,7 @@ public class TankFrame extends Frame {
                 break;
             default:
                 break;
-        }
+        }*/
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -118,11 +122,10 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (bL) dir = Dir.LEFT;
-            if (bU) dir = Dir.UP;
-            if (bR) dir = Dir.RIGHT;
-            if (bD) dir = Dir.DOWN;
+            if (bL) myTank.setDir(Dir.LEFT);
+            if (bU) myTank.setDir(Dir.UP);
+            if (bR) myTank.setDir(Dir.RIGHT);
+            if (bD) myTank.setDir(Dir.DOWN);
         }
     }
-
 }
