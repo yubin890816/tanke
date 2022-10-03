@@ -8,26 +8,34 @@ import java.awt.*;
 public class Bullet {
 
     // 子弹移动的速度
-    public static final int SPEED = 1;
+    public static final int SPEED = 10;
 
     private int x, y;
 
     private Dir dir;
 
-    public Bullet(int x, int y, Dir dir) {
+    boolean live = true;
+
+    private TankFrame tf;
+
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
+        if (!live) {
+            tf.bulletList.remove(this);
+        }
         Color color = g.getColor();
         // 设置子弹的颜色
         g.setColor(Color.RED);
-        g.fillOval(x, y, 10, 10);
+        g.fillOval(x, y, 20, 20);
         g.setColor(color);
-        //x += 10;
-        //y += 10;
+        // x += 10;
+        // y += 10;
         move();
     }
 
@@ -47,6 +55,9 @@ public class Bullet {
                 break;
             default:
                 break;
+        }
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            live = false;
         }
     }
 }

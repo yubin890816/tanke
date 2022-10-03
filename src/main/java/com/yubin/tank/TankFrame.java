@@ -5,6 +5,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TankFrame extends Frame {
     // 写到这里, 如果我要和别人一起玩的话, 并且增加敌人的坦克, 那怎么处理呢? x1、y1; x2、y2; ...
@@ -21,7 +24,7 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
 
-    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    List<Bullet> bulletList = new ArrayList<>();
 
     public TankFrame() throws HeadlessException {
         // 设置窗口大小
@@ -48,8 +51,24 @@ public class TankFrame extends Frame {
     // Graphics: 相当于画笔
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量:" + bulletList.size(), 10, 60);
+        g.setColor(c);
+
         myTank.paint(g);
-        bullet.paint(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
+        //Iterator<Bullet> iterator = bulletList.iterator();
+        //while (iterator.hasNext()) {
+        //    Bullet bullet = iterator.next();
+        //    if (!bullet.live) {
+        //        iterator.remove();
+        //    } else {
+        //        bullet.paint(g);
+        //    }
+        //}
         // 这个方法其实放在Tank类里面要更加的合适(坦克自己更加的了解他自己在什么位置)
         /**
          * 在窗口 200(x轴) 200(y轴)的位置画一个宽50 高50 的矩形
