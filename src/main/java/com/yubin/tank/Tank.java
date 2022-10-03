@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Tank {
     // 坦克移动的速度
-    public static final int SPEED = 10;
+    public static final int SPEED = 5;
 
     private int x, y;
 
