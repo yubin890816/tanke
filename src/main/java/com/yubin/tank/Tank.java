@@ -1,8 +1,6 @@
 package com.yubin.tank;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Tank {
     // 坦克移动的速度
